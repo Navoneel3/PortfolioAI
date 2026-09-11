@@ -78,4 +78,4 @@ portfolioai/
 
 ## License
 
-This project is a personal portfolio application by Navoneel Dey.
+This project is a personal portfolio application by me (Navoneel Dey).
