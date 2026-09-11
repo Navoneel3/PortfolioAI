@@ -1,20 +1,36 @@
 import json
 import os
+from functools import lru_cache
+from fastapi.responses import FileResponse
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from groq import Groq
 from pydantic import BaseModel
 from pypdf import PdfReader
 load_dotenv()
+
+BASE_DIR = Path(__file__).resolve().parent
+RESUME_PATH = BASE_DIR / "Navoneel Dey-Resume.pdf"
+FRONTEND_DIR = BASE_DIR.parent / "frontend"
 
 client = Groq(
     api_key=os.getenv("GROQ_API_KEY")
 )
 
 model = "openai/gpt-oss-120b"
-app=FastAPI()
+app = FastAPI(title="Portfolio AI")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:8000,http://127.0.0.1:8000").split(","),
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
+
 #Parse Resume
 class Experience(BaseModel):
     company: str | None = None
@@ -157,17 +173,27 @@ def read_pdf(file_path: Path):
 
     return text
 
+
+@lru_cache(maxsize=1)
+def get_resume():
+    if not RESUME_PATH.exists():
+        raise FileNotFoundError(f"Resume not found at {RESUME_PATH}")
+    return parse_resume(read_pdf(RESUME_PATH))
+
 @app.get("/")
 def home():
-    return {
-        "message":"Protfolio AI is Running"
-    }
+    return FileResponse(FRONTEND_DIR / "index.html")
 
 @app.post("/chat")
 def chat(request:ChatRequest):
-    resume_text=read_pdf(Path("Navoneel Dey-Resume.pdf"))
-    resume=parse_resume(resume_text)
+    if not os.getenv("GROQ_API_KEY"):
+        raise HTTPException(status_code=503, detail="GROQ_API_KEY is not configured on the server.")
+    resume = get_resume()
     answer=ask_candidate(request.question,resume)
     return {
         "answer":answer
     }
+
+
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")

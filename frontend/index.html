@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Navoneel Dey's interactive AI portfolio.">
+  <title>Navoneel Dey | Portfolio AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Navoneel Dey home">
+        <span class="wordmark-mark">N</span>
+        <span>Navoneel Dey</span>
+      </a>
+      <div class="availability"><span class="status-dot"></span> Available for opportunities</div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Portfolio / AI interface <span>2026</span></p>
+          <h1 id="hero-title">Build with intent.<br><em>Ship with clarity.</em></h1>
+          <p class="hero-intro">A personal portfolio that can speak for itself. Ask about my experience, projects, skills, or how I approach building useful software.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#conversation">Talk to my portfolio <span aria-hidden="true">&#8595;</span></a>
+            <a class="text-link" href="mailto:hello@navoneeldey.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+          </div>
+        </div>
+        <aside class="signal-card" aria-label="Portfolio status">
+          <div class="signal-card-top"><span>LIVE SIGNAL</span><span class="pulse"></span></div>
+          <div class="signal-glyph">&#9672;</div>
+          <p>The quickest way to know what I can do is to ask.</p>
+          <div class="signal-footer"><span>AI REPRESENTATIVE</span><span>01</span></div>
+        </aside>
+      </section>
+
+      <section class="conversation-section" id="conversation" aria-labelledby="conversation-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Interactive profile</p>
+            <h2 id="conversation-title">Ask the candidate.</h2>
+          </div>
+          <p class="section-note">Answers are grounded in the resume<br class="desktop-only"> and kept intentionally direct.</p>
+        </div>
+
+        <div class="chat-window">
+          <div class="chat-header">
+            <div class="agent-identity"><span class="agent-avatar">N</span><div><strong>Navoneel's AI</strong><span>Usually replies in a moment</span></div></div>
+            <span class="online-label"><span class="status-dot"></span> Online</span>
+          </div>
+          <div class="messages" id="messages" aria-live="polite">
+            <div class="message-row assistant-row">
+              <span class="message-avatar">N</span>
+              <div class="message assistant-message">Hi, I’m Navoneel’s AI portfolio. Ask me about experience, projects, skills, or what I’m looking to build next.</div>
+            </div>
+          </div>
+          <div class="suggestions" aria-label="Suggested questions">
+            <button type="button" class="suggestion">What are your strongest skills?</button>
+            <button type="button" class="suggestion">Tell me about your experience.</button>
+            <button type="button" class="suggestion">What projects have you worked on?</button>
+          </div>
+          <form class="composer" id="chat-form">
+            <label class="sr-only" for="question">Ask a question</label>
+            <input id="question" name="question" type="text" placeholder="Ask anything about Navoneel..." autocomplete="off" maxlength="500" required>
+            <button class="send-button" type="submit" aria-label="Send question" title="Send question"><span aria-hidden="true">&#8593;</span></button>
+          </form>
+        </div>
+      </section>
+
+      <section class="principles" aria-label="Working principles">
+        <p class="eyebrow">How I work</p>
+        <div class="principle-grid">
+          <article><span>01</span><h3>Curious by default</h3><p>Understand the problem deeply before reaching for the obvious solution.</p></article>
+          <article><span>02</span><h3>Useful over flashy</h3><p>Make things that are clear, reliable, and genuinely valuable to people.</p></article>
+          <article><span>03</span><h3>Always in motion</h3><p>Learn quickly, iterate in public, and keep raising the quality bar.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>© 2026 Navoneel Dey</span><span>Made with curiosity <span class="footer-dot">·</span> Powered by Portfolio AI</span></footer>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
